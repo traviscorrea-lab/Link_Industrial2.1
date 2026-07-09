@@ -1,1 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Industrial · Guia Visual de Redes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ecf9;
+            color: #1A1A2E;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.4s, color 0.4s;
+        }
+        body.dark-mode {
+            background: #0f0e1a;
+            color: #e8e4f0;
+        }
+        body.dark-mode .container { background: #1a1a2e; box-shadow: 0 20px 40px -10px rgba(108, 43, 217, 0.3); }
+        body.dark-mode .card { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .card-header i { background: #1a1a2e; border-color: #6C2BD9; color: #F7C948; }
+        body.dark-mode .extra-detail { background: #1a1a2e; color: #d4c8f0; border-left-color: #FF6B35; }
+        body.dark-mode .media-box { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .media-box .text i { background: #1a1a2e; color: #F7C948; }
+        body.dark-mode .tools-section { background: #222244; }
+        body.dark-mode .tools-section .tool-item { background: #1a1a2e; }
+        body.dark-mode .tab-btn { color: #a29bfe; }
+        body.dark-mode .tab-btn.active { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; box-shadow: 0 4px 20px rgba(108, 43, 217, 0.4); }
+        body.dark-mode .tab-btn:hover { background: #2d2d55; color: #F7C948; }
+        body.dark-mode .topo-card { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .topo-card h4 { color: #e8e4f0; }
+        body.dark-mode .topo-card .desc { color: #d4c8f0; }
+        body.dark-mode .reading-card { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .reading-card h4 { color: #e8e4f0; }
+        body.dark-mode .reading-card p { color: #d4c8f0; }
+        body.dark-mode .badge { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; }
+        body.dark-mode .badge-topo { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; }
+        body.dark-mode .footer-note { color: #a29bfe; }
+        body.dark-mode .header { border-bottom-color: #3d3d6b; }
+        body.dark-mode .tabs { border-bottom-color: #3d3d6b; }
+        body.dark-mode .dark-toggle { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; }
+        body.dark-mode .dark-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(108, 43, 217, 0.4); }
+        body.dark-mode .btn-link { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; }
+        body.dark-mode .btn-link:hover { box-shadow: 0 6px 24px rgba(108, 43, 217, 0.4); }
+        body.dark-mode .glossary-term { border-bottom-color: #FF6B35; color: #F7C948; }
+        body.dark-mode .glossary-tooltip { background: #6C2BD9; color: white; }
+        body.dark-mode .quiz-container { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .quiz-container h3 { color: #e8e4f0; }
+        body.dark-mode .quiz-question h4 { color: #e8e4f0; }
+        body.dark-mode .quiz-options button { background: #1a1a2e; border-color: #3d3d6b; color: #e8e4f0; }
+        body.dark-mode .quiz-options button:hover:not(:disabled) { background: linear-gradient(135deg, #6C2BD9, #FF6B35); border-color: #6C2BD9; color: white; }
+        body.dark-mode .quiz-options button.correct { background: #00C9A7; border-color: #00C9A7; color: #1A1A2E; }
+        body.dark-mode .quiz-options button.wrong { background: #FF4757; border-color: #FF4757; color: white; }
+        body.dark-mode .quiz-feedback.success { background: #1a3a2a; color: #00C9A7; }
+        body.dark-mode .quiz-feedback.error { background: #3a1a1a; color: #FF6B6B; }
+        body.dark-mode .material-content { background: #222244; border-color: #3d3d6b; }
+        body.dark-mode .material-content h3 { color: #e8e4f0; }
+        body.dark-mode .material-content p, body.dark-mode .material-content li { color: #d4c8f0; }
+        body.dark-mode .material-content .highlight-box { background: #1a1a2e; }
+        body.dark-mode .tool-tutorial { background: #1a1a2e; border-color: #3d3d6b; }
+        body.dark-mode .tool-tutorial h4 { color: #e8e4f0; }
+        body.dark-mode .tool-tutorial p, body.dark-mode .tool-tutorial li { color: #d4c8f0; }
+        body.dark-mode .external-links { background: #1a1a2e; border-color: #3d3d6b; }
+        body.dark-mode .external-links a { color: #a29bfe; }
+        body.dark-mode .external-links a:hover { color: #F7C948; }
+        body.dark-mode hr { border-top-color: #3d3d6b; }
 
+        .container { max-width: 1280px; width: 100%; background: #ffffff; border-radius: 40px; box-shadow: 0 24px 48px -16px rgba(108, 43, 217, 0.15); padding: 2rem 2rem 2.5rem; transition: all 0.4s; }
+        .logo-svg { width: 52px; height: 52px; flex-shrink: 0; }
+        .logo-svg svg { width: 100%; height: 100%; display: block; }
+        .header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 3px solid #f0ecf9; padding-bottom: 1.25rem; }
+        .logo-area { display: flex; align-items: center; gap: 16px; }
+        .logo-text { font-weight: 800; font-size: 2rem; letter-spacing: -0.5px; background: linear-gradient(135deg, #6C2BD9 30%, #FF6B35 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo-text span { font-weight: 400; color: #a29bfe; font-size: 0.95rem; margin-left: 6px; letter-spacing: 0.2px; -webkit-text-fill-color: #a29bfe; }
+        body.dark-mode .logo-text span { -webkit-text-fill-color: #a29bfe; }
+        .header-controls { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .dark-toggle { background: #f0ecf9; border: none; border-radius: 60px; padding: 0.5rem 1.4rem; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; font-family: 'Inter', sans-serif; color: #1A1A2E; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .dark-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(108,43,217,0.2); }
+        .badge { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; padding: 0.3rem 1.2rem; border-radius: 60px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 12px rgba(108,43,217,0.2); }
+        .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 1.8rem 0 2rem; border-bottom: 3px solid #f0ecf9; padding-bottom: 0.2rem; }
+        .tab-btn { background: transparent; border: none; padding: 0.7rem 1.6rem; font-weight: 600; font-size: 0.95rem; color: #6C2BD9; cursor: pointer; border-radius: 60px 60px 0 0; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; }
+        .tab-btn i { font-size: 1.1rem; }
+        .tab-btn:hover { background: #f0ecf9; color: #FF6B35; }
+        .tab-btn.active { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; box-shadow: 0 6px 20px rgba(108,43,217,0.25); }
+        .tab-content { display: none; animation: fadeUp 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin: 1.8rem 0 1rem; }
+        .card { background: #f8f6ff; border-radius: 28px; padding: 1.8rem 1.5rem 2rem; box-shadow: 0 6px 18px rgba(0,0,0,0.02); border: 2px solid #f0ecf9; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #6C2BD9, #FF6B35, #F7C948); opacity: 0; transition: opacity 0.3s; }
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-8px); border-color: #6C2BD9; box-shadow: 0 20px 40px -12px rgba(108,43,217,0.15); }
+        .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 1.2rem; }
+        .card-header i { font-size: 2.2rem; color: #6C2BD9; background: white; padding: 14px; border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.02); border: 2px solid #f0ecf9; transition: 0.3s; }
+        .card:hover .card-header i { transform: scale(1.06) rotate(-3deg); border-color: #FF6B35; color: #FF6B35; }
+        .card h3 { font-size: 1.3rem; font-weight: 700; color: #1A1A2E; }
+        .card p { color: #4a4a6a; line-height: 1.6; font-size: 0.95rem; margin-top: 6px; }
+        .extra-detail { margin-top: 16px; font-size: 0.9rem; background: #f0ecf9; padding: 0.8rem 1.2rem; border-radius: 18px; color: #1A1A2E; border-left: 5px solid #FF6B35; font-weight: 500; }
+        .extra-detail i { margin-right: 8px; color: #FF6B35; }
+
+        .btn-link { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; border: none; padding: 0.6rem 1.6rem; border-radius: 60px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 4px 16px rgba(108,43,217,0.2); text-decoration: none; margin-top: 8px; }
+        .btn-link:hover { transform: scale(1.04); box-shadow: 0 6px 24px rgba(108,43,217,0.35); }
+        .btn-link i { font-size: 0.9rem; }
+        .btn-link.article { background: linear-gradient(135deg, #00C9A7, #00A88E); }
+        .btn-link.wikipedia { background: linear-gradient(135deg, #4A90D9, #357ABD); }
+        .btn-link.external { background: linear-gradient(135deg, #FF6B35, #E55A2B); }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+        .material-content { display: none; background: #f8f6ff; border-radius: 24px; padding: 2rem; margin: 1.5rem 0; border: 2px solid #f0ecf9; animation: fadeUp 0.4s ease; }
+        .material-content.show { display: block; }
+        .material-content h3 { color: #1A1A2E; font-size: 1.4rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
+        .material-content h3 i { color: #FF6B35; }
+        .material-content p { color: #4a4a6a; line-height: 1.8; margin-bottom: 1rem; }
+        .material-content ul { color: #4a4a6a; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .material-content ul li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .material-content ul li i { color: #6C2BD9; margin-right: 8px; }
+        .material-content .highlight-box { background: #f0ecf9; border-radius: 16px; padding: 1rem 1.5rem; margin: 1rem 0; border-left: 4px solid #FF6B35; }
+        .material-content .highlight-box strong { color: #6C2BD9; }
+        .material-content .image-placeholder { width: 100%; height: 200px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; margin: 1rem 0; }
+        .material-content .image-placeholder.purple { background: linear-gradient(135deg, #6C2BD9, #8E44AD); }
+        .material-content .image-placeholder.green { background: linear-gradient(135deg, #00C9A7, #00A88E); }
+        .material-content .image-placeholder.blue { background: linear-gradient(135deg, #4A90D9, #357ABD); }
+        .material-content .image-placeholder.orange { background: linear-gradient(135deg, #FF6B35, #E55A2B); }
+        .material-content .image-placeholder.yellow { background: linear-gradient(135deg, #F7C948, #F5A623); }
+        .close-material { background: transparent; border: none; color: #FF4757; font-size: 1.5rem; cursor: pointer; padding: 0 8px; transition: 0.3s; float: right; }
+        .close-material:hover { transform: scale(1.2); color: #CC0000; }
+
+        .external-links { background: #f8f6ff; border-radius: 20px; padding: 1.5rem; margin: 1rem 0; border: 2px solid #f0ecf9; }
+        .external-links h4 { color: #1A1A2E; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .external-links h4 i { color: #4A90D9; }
+        .external-links ul { list-style: none; padding-left: 0; }
+        .external-links ul li { padding: 6px 0; border-bottom: 1px solid #f0ecf9; }
+        .external-links ul li:last-child { border-bottom: none; }
+        .external-links a { color: #6C2BD9; text-decoration: none; font-weight: 500; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .external-links a:hover { color: #FF6B35; transform: translateX(4px); }
+        .external-links a i { font-size: 0.9rem; }
+
+        .topo-grid { display: flex; flex-wrap: wrap; gap: 2rem; margin: 1.8rem 0; }
+        .topo-card { flex: 1 1 280px; background: #f8f6ff; border-radius: 30px; padding: 2rem 1.8rem; border: 2px solid #f0ecf9; transition: 0.3s; position: relative; overflow: hidden; cursor: pointer; }
+        .topo-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #6C2BD9, #FF6B35); opacity: 0; transition: opacity 0.3s; }
+        .topo-card:hover::before { opacity: 1; }
+        .topo-card:hover { transform: translateY(-6px); border-color: #6C2BD9; box-shadow: 0 16px 32px -8px rgba(108,43,217,0.1); }
+        .topo-card h4 { font-size: 1.5rem; color: #1A1A2E; display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem; }
+        .topo-card .desc { color: #4a4a6a; line-height: 1.6; margin: 0.8rem 0 1.2rem; }
+        .vantagens, .desvantagens { margin-top: 0.8rem; padding-left: 1.2rem; }
+        .vantagens li, .desvantagens li { list-style: none; margin-bottom: 6px; font-size: 0.95rem; display: flex; align-items: baseline; gap: 10px; }
+        .vantagens li i { color: #00C9A7; width: 18px; font-size: 0.85rem; }
+        .desvantagens li i { color: #FF4757; width: 18px; font-size: 0.85rem; }
+        .badge-topo { background: linear-gradient(135deg, #6C2BD9, #FF6B35); padding: 0.25rem 1.2rem; border-radius: 60px; font-size: 0.7rem; font-weight: 700; color: white; display: inline-block; margin-bottom: 8px; letter-spacing: 0.5px; }
+
+        .tool-tutorial { background: #f8f6ff; border-radius: 24px; padding: 1.5rem; margin: 1.5rem 0; border: 2px solid #f0ecf9; transition: 0.3s; }
+        .tool-tutorial:hover { border-color: #6C2BD9; }
+        .tool-tutorial h4 { color: #1A1A2E; font-size: 1.1rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .tool-tutorial h4 i { color: #FF6B35; }
+        .tool-tutorial p { color: #4a4a6a; line-height: 1.7; font-size: 0.95rem; margin-bottom: 0.8rem; }
+        .tool-tutorial ul { color: #4a4a6a; padding-left: 1.5rem; margin-bottom: 0.8rem; }
+        .tool-tutorial ul li { margin-bottom: 0.4rem; line-height: 1.6; }
+        .tool-tutorial ul li i { color: #6C2BD9; margin-right: 8px; }
+
+        .reading-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 1.8rem 0; }
+        .reading-card { background: #f8f6ff; border-radius: 24px; padding: 1.5rem; border: 2px solid #f0ecf9; transition: 0.3s; }
+        .reading-card:hover { transform: translateY(-4px); border-color: #6C2BD9; box-shadow: 0 12px 28px rgba(108,43,217,0.08); }
+        .reading-card .image-placeholder { width: 100%; height: 160px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: white; font-size: 3rem; }
+        .reading-card .image-placeholder.purple { background: linear-gradient(135deg, #6C2BD9, #8E44AD); }
+        .reading-card .image-placeholder.green { background: linear-gradient(135deg, #00C9A7, #00A88E); }
+        .reading-card .image-placeholder.blue { background: linear-gradient(135deg, #4A90D9, #357ABD); }
+        .reading-card .image-placeholder.orange { background: linear-gradient(135deg, #FF6B35, #E55A2B); }
+        .reading-card .image-placeholder.yellow { background: linear-gradient(135deg, #F7C948, #F5A623); }
+        .reading-card h4 { color: #1A1A2E; margin-bottom: 6px; }
+        .reading-card p { color: #4a4a6a; font-size: 0.9rem; line-height: 1.6; }
+
+        .glossary-wrapper { background: #f8f6ff; border-radius: 20px; padding: 0.8rem 1.8rem; display: inline-flex; flex-wrap: wrap; gap: 24px; margin-top: 1rem; border: 2px solid #f0ecf9; }
+        .glossary-term { border-bottom: 3px solid #FF6B35; cursor: help; position: relative; font-weight: 700; color: #6C2BD9; padding-bottom: 2px; }
+        body.dark-mode .glossary-term { color: #F7C948; }
+        .glossary-tooltip { display: none; position: absolute; background: #6C2BD9; color: white; padding: 8px 18px; border-radius: 14px; font-size: 0.8rem; bottom: 130%; left: 50%; transform: translateX(-50%); white-space: nowrap; z-index: 20; font-weight: 400; box-shadow: 0 6px 16px rgba(108,43,217,0.3); }
+        .glossary-term:hover .glossary-tooltip { display: block; }
+
+        .quiz-container { background: #f8f6ff; border-radius: 28px; padding: 2rem; margin: 1.8rem 0; border: 2px solid #f0ecf9; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .quiz-container h3 { color: #1A1A2E; margin-bottom: 1.2rem; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .quiz-container h3 i { color: #F7C948; }
+        .quiz-container h3 .quiz-counter { font-size: 0.85rem; color: #a29bfe; font-weight: 400; margin-left: auto; }
+        .quiz-question { margin-bottom: 1.8rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f0ecf9; }
+        .quiz-question:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .quiz-question h4 { margin-bottom: 10px; color: #1A1A2E; font-size: 1rem; }
+        .quiz-question .question-number { display: inline-block; background: #6C2BD9; color: white; padding: 0.1rem 0.7rem; border-radius: 30px; font-size: 0.7rem; font-weight: 700; margin-right: 8px; }
+        .quiz-options { display: flex; flex-wrap: wrap; gap: 12px; }
+        .quiz-options button { background: white; border: 2px solid #f0ecf9; padding: 0.6rem 1.6rem; border-radius: 60px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; transition: 0.3s; color: #1A1A2E; font-size: 0.9rem; }
+        .quiz-options button:hover:not(:disabled) { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; border-color: #6C2BD9; transform: scale(1.02); }
+        .quiz-options button.correct { background: #00C9A7; color: #1A1A2E; border-color: #00C9A7; }
+        .quiz-options button.wrong { background: #FF4757; color: white; border-color: #FF4757; }
+        .quiz-options button:disabled { cursor: not-allowed; opacity: 0.7; }
+        .quiz-feedback { margin-top: 12px; padding: 12px 18px; border-radius: 16px; font-weight: 500; display: none; }
+        .quiz-feedback.show { display: block; animation: fadeUp 0.3s ease; }
+        .quiz-feedback.success { background: #d4edda; color: #155724; }
+        .quiz-feedback.error { background: #f8d7da; color: #721c24; }
+        .quiz-progress { margin-top: 1rem; padding: 0.8rem 1.2rem; background: #f0ecf9; border-radius: 60px; display: inline-block; font-weight: 600; color: #6C2BD9; }
+        .quiz-reset-btn { margin-top: 1rem; background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; border: none; padding: 0.6rem 2rem; border-radius: 60px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .quiz-reset-btn:hover { transform: scale(1.04); box-shadow: 0 6px 24px rgba(108,43,217,0.35); }
+
+        .tools-section { background: #f0ecf9; border-radius: 28px; padding: 1.8rem 2rem; margin: 2rem 0 0.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; }
+        .tools-section .tool-item { display: flex; align-items: center; gap: 14px; background: white; padding: 0.5rem 1.4rem 0.5rem 0.8rem; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); transition: 0.3s; }
+        .tools-section .tool-item:hover { transform: scale(1.02); box-shadow: 0 4px 16px rgba(108,43,217,0.08); }
+        .tools-section .tool-item i { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; padding: 12px; border-radius: 60px; font-size: 1rem; width: 44px; text-align: center; }
+        .tools-section .tool-item span { font-weight: 500; color: #1A1A2E; font-size: 0.9rem; }
+        .tools-section .tool-item .download { color: #6C2BD9; font-size: 0.75rem; margin-left: 6px; text-decoration: none; padding: 4px 14px; background: #f0ecf9; border-radius: 60px; transition: 0.3s; font-weight: 600; cursor: pointer; }
+        .tools-section .tool-item .download:hover { background: linear-gradient(135deg, #6C2BD9, #FF6B35); color: white; }
+
+        .media-box { background: #f8f6ff; border-radius: 28px; padding: 1.5rem 2rem; margin: 2.2rem 0 1rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border: 2px solid #f0ecf9; transition: 0.3s; }
+        .media-box:hover { border-color: #6C2BD9; }
+        .media-box .text { display: flex; align-items: center; gap: 14px; }
+        .media-box .text i { font-size: 2.4rem; color: #FF6B35; background: white; padding: 14px; border-radius: 60px; box-shadow: 0 4px 8px rgba(0,0,0,0.03); }
+        .media-box .text span { font-weight: 600; color: #1A1A2E; font-size: 1rem; }
+
+        hr { border: none; border-top: 3px solid #f0ecf9; margin: 2rem 0 1rem; }
+        .footer-note { font-size: 0.85rem; color: #a29bfe; display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 0.5rem; }
+        .footer-note i { color: #FF6B35; }
+
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .container { padding: 1.2rem; border-radius: 24px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .logo-text { font-size: 1.5rem; }
+            .logo-text span { font-size: 0.8rem; }
+            .media-box { flex-direction: column; align-items: flex-start; gap: 14px; padding: 1.2rem; }
+            .tools-section { flex-direction: column; align-items: stretch; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .topo-grid { flex-direction: column; }
+            .logo-svg { width: 40px; height: 40px; }
+            .glossary-wrapper { flex-direction: column; gap: 12px; align-items: flex-start; }
+            .reading-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="logo-svg">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#6C2BD9" />
+                                <stop offset="50%" stop-color="#FF6B35" />
+                                <stop offset="100%" stop-color="#F7C948" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="8" y="8" width="84" height="84" rx="20" fill="white" stroke="url(#logoGrad)" stroke-width="4" />
+                        <circle cx="50" cy="38" r="10" fill="url(#logoGrad)" />
+                        <circle cx="32" cy="62" r="8" fill="url(#logoGrad)" />
+                        <circle cx="68" cy="62" r="8" fill="url(#logoGrad)" />
+                        <line x1="50" y1="38" x2="32" y2="62" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" />
+                        <line x1="50" y1="38" x2="68" y2="62" stroke="#FF6B35" stroke-width="3" stroke-linecap="round" />
+                        <line x1="32" y1="62" x2="68" y2="62" stroke="#6C2BD9" stroke-width="3" stroke-linecap="round" />
+                        <circle cx="50" cy="38" r="4" fill="white" />
+                        <rect x="44" y="72" width="12" height="6" rx="3" fill="#F7C948" />
+                    </svg>
+                </div>
+                <div class="logo-text">Link Industrial <span>· guia visual</span></div>
+            </div>
+            <div class="header-controls">
+                <button class="dark-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i> <span id="darkLabel">Modo Escuro</span>
+                </button>
+                <div class="badge">
+                    <i class="fas fa-industry"></i> chão de fábrica 4.0
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="tab1"><i class="fas fa-ethernet"></i> Cabos Industriais</button>
+            <button class="tab-btn" data-tab="tab2"><i class="fas fa-project-diagram"></i> Topologias</button>
+            <button class="tab-btn" data-tab="tab3"><i class="fas fa-newspaper"></i> Material de Leitura</button>
+            <button class="tab-btn" data-tab="tab4"><i class="fas fa-tools"></i> Ferramentas</button>
+        </div>
+
+              <!-- ============================================================ -->
+        <!-- ABA 1 – CABOS INDUSTRIAIS                                     -->
+        <!-- ============================================================ -->
+        <div id="tab1" class="tab-content active">
+
+            <div class="card-grid">
+                <!-- PAR TRANÇADO -->
+                <div class="card" onclick="toggleMaterial('material1')">
+                    <div class="card-header">
+                        <i class="fas fa-twist"></i>
+                        <h3>Par Trançado</h3>
+                    </div>
+                    <p>Cabos de cobre com pares de fios entrelaçados. Usado em Ethernet e sensores.</p>
+                    <div class="extra-detail">
+                        <i class="fas fa-microchip"></i> <strong>Na fábrica:</strong> CLPs, IHM, câmeras e switches (até 100m).
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-link article" onclick="event.stopPropagation(); toggleMaterial('material1')">
+                            <i class="fas fa-book-open"></i> Ler material completo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FIBRA ÓPTICA -->
+                <div class="card" onclick="toggleMaterial('material2')">
+                    <div class="card-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Fibra Óptica</h3>
+                    </div>
+                    <p>Transmissão por pulsos de luz, imune a interferências eletromagnéticas.</p>
+                    <div class="extra-detail">
+                        <i class="fas fa-microchip"></i> <strong>Na fábrica:</strong> longas distâncias (>100m), interligação de prédios.
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-link article" onclick="event.stopPropagation(); toggleMaterial('material2')">
+                            <i class="fas fa-book-open"></i> Ler material completo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- WIRELESS -->
+                <div class="card" onclick="toggleMaterial('material3')">
+                    <div class="card-header">
+                        <i class="fas fa-wifi"></i>
+                        <h3>Wireless</h3>
+                    </div>
+                    <p>Comunicação por ondas de rádio, sem cabos físicos. Mobilidade total.</p>
+                    <div class="extra-detail">
+                        <i class="fas fa-microchip"></i> <strong>Na fábrica:</strong> AGVs, sensores remotos, tablets e empilhadeiras.
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-link article" onclick="event.stopPropagation(); toggleMaterial('material3')">
+                            <i class="fas fa-book-open"></i> Ler material completo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATERIAL DE LEITURA - PAR TRANÇADO -->
+            <div id="material1" class="material-content">
+                <button class="close-material" onclick="toggleMaterial('material1')">&times;</button>
+                <h3><i class="fas fa-twist"></i> Par Trançado - Guia Completo</h3>
+                <div class="image-placeholder purple"><i class="fas fa-network-wired"></i></div>
+                <p><strong>O que é o cabo de par trançado?</strong></p>
+                <p>O cabo de par trançado é um tipo de cabo de cobre composto por pares de fios isolados que são entrelaçados (trançados) entre si. Este trançamento ajuda a reduzir a interferência eletromagnética (EMI) e a diafonia entre os pares.</p>
+                <div class="highlight-box">
+                    <p><strong>📌 Onde é usado na fábrica:</strong></p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Conexão de CLPs (Controladores Lógicos Programáveis)</li>
+                        <li><i class="fas fa-check-circle"></i> Interfaces Homem-Máquina (IHM)</li>
+                        <li><i class="fas fa-check-circle"></i> Câmeras de monitoramento</li>
+                        <li><i class="fas fa-check-circle"></i> Switches industriais</li>
+                        <li><i class="fas fa-check-circle"></i> Sensores e atuadores</li>
+                    </ul>
+                </div>
+                <p><strong>Características técnicas:</strong></p>
+                <ul>
+                    <li><i class="fas fa-ruler"></i> <strong>Distância máxima:</strong> 100 metros</li>
+                    <li><i class="fas fa-tachometer-alt"></i> <strong>Velocidade:</strong> até 10 Gbps (em categorias superiores)</li>
+                    <li><i class="fas fa-shield-alt"></i> <strong>Proteção:</strong> Pode ser blindado (STP) ou não blindado (UTP)</li>
+                    <li><i class="fas fa-plug"></i> <strong>Conector:</strong> RJ45</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>💡 Dica de instalação:</strong> Sempre utilize cabos com certificação CAT5e ou CAT6 para aplicações industriais, e mantenha uma distância mínima de 30 cm de cabos de energia para evitar interferências.</p>
+                </div>
+                <div class="external-links">
+                    <h4><i class="fab fa-wikipedia-w"></i> Leia mais na Wikipedia:</h4>
+                    <ul>
+                        <li><a href="https://pt.wikipedia.org/wiki/Cabo_de_par_tran%C3%A7ado" target="_blank"><i class="fas fa-external-link-alt"></i> Cabo de par trançado - Wikipedia</a></li>
+                        <li><a href="https://pt.wikipedia.org/wiki/Ethernet" target="_blank"><i class="fas fa-external-link-alt"></i> Ethernet - Wikipedia</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MATERIAL DE LEITURA - FIBRA ÓPTICA -->
+            <div id="material2" class="material-content">
+                <button class="close-material" onclick="toggleMaterial('material2')">&times;</button>
+                <h3><i class="fas fa-lightbulb"></i> Fibra Óptica - Guia Completo</h3>
+                <div class="image-placeholder blue"><i class="fas fa-fiber"></i></div>
+                <p><strong>O que é a fibra óptica?</strong></p>
+                <p>A fibra óptica é um meio de transmissão de dados que utiliza pulsos de luz para enviar informações através de filamentos de vidro ou plástico. É imune a interferências eletromagnéticas e permite distâncias muito maiores que cabos de cobre.</p>
+                <div class="highlight-box">
+                    <p><strong>📌 Onde é usada na fábrica:</strong></p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Interligação entre prédios industriais</li>
+                        <li><i class="fas fa-check-circle"></i> Backbone de rede (rede principal)</li>
+                        <li><i class="fas fa-check-circle"></i> Conexões de longa distância (>100m)</li>
+                        <li><i class="fas fa-check-circle"></i> Ambientes com alta interferência eletromagnética</li>
+                        <li><i class="fas fa-check-circle"></i> Redes de alta velocidade (10 Gbps+)</li>
+                    </ul>
+                </div>
+                <div class="external-links">
+                    <h4><i class="fab fa-wikipedia-w"></i> Leia mais na Wikipedia:</h4>
+                    <ul>
+                        <li><a href="https://pt.wikipedia.org/wiki/Fibra_%C3%B3ptica" target="_blank"><i class="fas fa-external-link-alt"></i> Fibra óptica - Wikipedia</a></li>
+                        <li><a href="https://pt.wikipedia.org/wiki/Comunica%C3%A7%C3%A3o_por_fibra_%C3%B3ptica" target="_blank"><i class="fas fa-external-link-alt"></i> Comunicação por fibra óptica - Wikipedia</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MATERIAL DE LEITURA - WIRELESS -->
+            <div id="material3" class="material-content">
+                <button class="close-material" onclick="toggleMaterial('material3')">&times;</button>
+                <h3><i class="fas fa-wifi"></i> Wireless - Guia Completo</h3>
+                <div class="image-placeholder orange"><i class="fas fa-wifi"></i></div>
+                <p><strong>O que é a rede Wireless (Wi-Fi) industrial?</strong></p>
+                <p>A rede wireless industrial utiliza ondas de rádio para transmitir dados sem a necessidade de cabos físicos. É amplamente utilizada em ambientes onde a mobilidade é essencial ou onde a instalação de cabos seria impraticável.</p>
+                <div class="highlight-box">
+                    <p><strong>📌 Onde é usada na fábrica:</strong></p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> AGVs (Robôs móveis autônomos)</li>
+                        <li><i class="fas fa-check-circle"></i> Sensores remotos em locais de difícil acesso</li>
+                        <li><i class="fas fa-check-circle"></i> Tablets e dispositivos móveis dos operadores</li>
+                        <li><i class="fas fa-check-circle"></i> Empilhadeiras e veículos industriais</li>
+                        <li><i class="fas fa-check-circle"></i> Monitoramento de ativos em movimento</li>
+                    </ul>
+                </div>
+                <div class="external-links">
+                    <h4><i class="fab fa-wikipedia-w"></i> Leia mais na Wikipedia:</h4>
+                    <ul>
+                        <li><a href="https://pt.wikipedia.org/wiki/Wi-Fi" target="_blank"><i class="fas fa-external-link-alt"></i> Wi-Fi - Wikipedia</a></li>
+                        <li><a href="https://pt.wikipedia.org/wiki/Rede_sem_fio" target="_blank"><i class="fas fa-external-link-alt"></i> Rede sem fio - Wikipedia</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GLOSSÁRIO -->
+            <div class="glossary-wrapper">
+                <span class="glossary-term"><strong>EMI</strong><span class="glossary-tooltip">Interferência Eletromagnética</span></span>
+                <span class="glossary-term"><strong>Latência</strong><span class="glossary-tooltip">Tempo de resposta da rede</span></span>
+                <span class="glossary-term"><strong>Largura de banda</strong><span class="glossary-tooltip">Capacidade de transmissão (Mbps/Gbps)</span></span>
+                <span class="glossary-term"><strong>CLP</strong><span class="glossary-tooltip">Controlador Lógico Programável</span></span>
+                <span class="glossary-term"><strong>IIoT</strong><span class="glossary-tooltip">Internet Industrial das Coisas</span></span>
+            </div>
+
+            <div class="media-box">
+                <div class="text">
+                    <i class="fas fa-play-circle"></i>
+                    <span><strong>Material completo:</strong> clique nos cards acima para ler sobre cada tipo de cabo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ABA 2 – TOPOLOGIAS                                            -->
+        <!-- ============================================================ -->
+        <div id="tab2" class="tab-content">
+
+            <div class="topo-grid">
+                <!-- ESTRELA -->
+                <div class="topo-card" onclick="toggleMaterial('material4')">
+                    <span class="badge-topo"><i class="fas fa-star"></i> TOPOLOGIA</span>
+                    <h4><i class="fas fa-star" style="color:#F7C948;"></i> Layout em Estrela</h4>
+                    <p class="desc">Todos os dispositivos se conectam a um switch central. Fluxo de dados gerenciado e isolado.</p>
+                    <div><strong>👍 Vantagens</strong>
+                        <ul class="vantagens">
+                            <li><i class="fas fa-check-circle"></i> Falha em um cabo não derruba a rede</li>
+                            <li><i class="fas fa-check-circle"></i> Fácil de expandir e diagnosticar</li>
+                            <li><i class="fas fa-check-circle"></i> Desempenho estável</li>
+                        </ul>
+                    </div>
+                    <div><strong>👎 Desvantagens</strong>
+                        <ul class="desvantagens">
+                            <li><i class="fas fa-times-circle"></i> Depende do switch central (ponto único de falha)</li>
+                            <li><i class="fas fa-times-circle"></i> Mais cabos e investimento inicial</li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-link article" onclick="event.stopPropagation(); toggleMaterial('material4')">
+                            <i class="fas fa-book-open"></i> Ler mais sobre Estrela
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BARRAMENTO -->
+                <div class="topo-card" onclick="toggleMaterial('material5')">
+                    <span class="badge-topo"><i class="fas fa-grip-lines"></i> TOPOLOGIA</span>
+                    <h4><i class="fas fa-grip-lines" style="color:#a29bfe;"></i> Layout em Barramento</h4>
+                    <p class="desc">Todos os dispositivos compartilham um único cabo (backbone). Dados trafegam em ambos os sentidos.</p>
+                    <div><strong>👍 Vantagens</strong>
+                        <ul class="vantagens">
+                            <li><i class="fas fa-check-circle"></i> Menos cabo, mais econômico</li>
+                            <li><i class="fas fa-check-circle"></i> Fácil de instalar em linhas extensas</li>
+                        </ul>
+                    </div>
+                    <div><strong>👎 Desvantagens</strong>
+                        <ul class="desvantagens">
+                            <li><i class="fas fa-times-circle"></i> Falta de redundância: falha no cabo para toda a rede</li>
+                            <li><i class="fas fa-times-circle"></i> Dificuldade para isolar problemas</li>
+                            <li><i class="fas fa-times-circle"></i> Desempenho cai com muitos dispositivos</li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-link article" onclick="event.stopPropagation(); toggleMaterial('material5')">
+                            <i class="fas fa-book-open"></i> Ler mais sobre Barramento
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATERIAL TOPOLOGIA ESTRELA -->
+            <div id="material4" class="material-content">
+                <button class="close-material" onclick="toggleMaterial('material4')">&times;</button>
+                <h3><i class="fas fa-star" style="color:#F7C948;"></i> Topologia em Estrela - Guia Completo</h3>
+                <div class="image-placeholder yellow"><i class="fas fa-star"></i></div>
+                <p><strong>O que é a topologia em estrela?</strong></p>
+                <p>Na topologia em estrela, todos os dispositivos (nós) se conectam a um ponto central, geralmente um switch ou hub. Cada dispositivo possui um cabo dedicado que o conecta ao ponto central, criando uma estrutura que lembra uma estrela.</p>
+                <div class="external-links">
+                    <h4><i class="fab fa-wikipedia-w"></i> Leia mais na Wikipedia:</h4>
+                    <ul>
+                        <li><a href="https://pt.wikipedia.org/wiki/Topologia_em_estrela" target="_blank"><i class="fas fa-external-link-alt"></i> Topologia em estrela - Wikipedia</a></li>
+                        <li><a href="https://pt.wikipedia.org/wiki/Rede_de_computadores" target="_blank"><i class="fas fa-external-link-alt"></i> Rede de computadores - Wikipedia</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MATERIAL TOPOLOGIA BARRAMENTO -->
+            <div id="material5" class="material-content">
+                <button class="close-material" onclick="toggleMaterial('material5')">&times;</button>
+                <h3><i class="fas fa-grip-lines" style="color:#a29bfe;"></i> Topologia em Barramento - Guia Completo</h3>
+                <div class="image-placeholder blue"><i class="fas fa-grip-lines"></i></div>
+                <p><strong>O que é a topologia em barramento?</strong></p>
+                <p>Na topologia em barramento, todos os dispositivos compartilham um único cabo principal (chamado de backbone ou barramento). Os dados trafegam em ambas as direções e cada dispositivo "escuta" o barramento para identificar se a mensagem é para ele.</p>
+                <div class="external-links">
+                    <h4><i class="fab fa-wikipedia-w"></i> Leia mais na Wikipedia:</h4>
+                    <ul>
+                        <li><a href="https://pt.wikipedia.org/wiki/Topologia_em_barramento" target="_blank"><i class="fas fa-external-link-alt"></i> Topologia em barramento - Wikipedia</a></li>
+                        <li><a href="https://pt.wikipedia.org/wiki/Rede_de_computadores" target="_blank"><i class="fas fa-external-link-alt"></i> Rede de computadores - Wikipedia</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUIZ - 10 PERGUNTAS -->
+            <div class="quiz-container">
+                <h3>
+                    <i class="fas fa-brain"></i> Quiz - Teste seus conhecimentos
+                    <span class="quiz-counter" id="quizCounter">0/10 respondidas</span>
+                </h3>
+
+                <!-- Pergunta 1 -->
+                <div class="quiz-question" id="q1">
+                    <h4><span class="question-number">1</span> Qual cabo é imune a interferências eletromagnéticas?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q1')">Par Trançado</button>
+                        <button onclick="checkQuiz(this, true, 'q1')">Fibra Óptica</button>
+                        <button onclick="checkQuiz(this, false, 'q1')">Wireless</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 2 -->
+                <div class="quiz-question" id="q2">
+                    <h4><span class="question-number">2</span> Qual a distância máxima do cabo de par trançado?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, true, 'q2')">100 metros</button>
+                        <button onclick="checkQuiz(this, false, 'q2')">500 metros</button>
+                        <button onclick="checkQuiz(this, false, 'q2')">1 km</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 3 -->
+                <div class="quiz-question" id="q3">
+                    <h4><span class="question-number">3</span> Qual topologia é mais recomendada para fábricas modernas?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, true, 'q3')">Estrela</button>
+                        <button onclick="checkQuiz(this, false, 'q3')">Barramento</button>
+                        <button onclick="checkQuiz(this, false, 'q3')">Anel</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 4 -->
+                <div class="quiz-question" id="q4">
+                    <h4><span class="question-number">4</span> O que significa EMI?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q4')">Eletricidade Máxima Industrial</button>
+                        <button onclick="checkQuiz(this, true, 'q4')">Interferência Eletromagnética</button>
+                        <button onclick="checkQuiz(this, false, 'q4')">Energia Magnética Interna</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 5 -->
+                <div class="quiz-question" id="q5">
+                    <h4><span class="question-number">5</span> Qual conector é usado em fibra óptica?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q5')">RJ45</button>
+                        <button onclick="checkQuiz(this, true, 'q5')">LC ou SC</button>
+                        <button onclick="checkQuiz(this, false, 'q5')">USB-C</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 6 -->
+                <div class="quiz-question" id="q6">
+                    <h4><span class="question-number">6</span> Qual a principal desvantagem da topologia em barramento?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q6')">Custo elevado</button>
+                        <button onclick="checkQuiz(this, true, 'q6')">Falha única derruba toda a rede</button>
+                        <button onclick="checkQuiz(this, false, 'q6')">Dificuldade de instalação</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 7 -->
+                <div class="quiz-question" id="q7">
+                    <h4><span class="question-number">7</span> O que é um CLP na indústria?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q7')">Computador de Longa Potência</button>
+                        <button onclick="checkQuiz(this, true, 'q7')">Controlador Lógico Programável</button>
+                        <button onclick="checkQuiz(this, false, 'q7')">Circuito Linear Permanente</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 8 -->
+                <div class="quiz-question" id="q8">
+                    <h4><span class="question-number">8</span> Qual cabo permite velocidades acima de 10 Gbps?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q8')">Par Trançado CAT5e</button>
+                        <button onclick="checkQuiz(this, true, 'q8')">Fibra Óptica</button>
+                        <button onclick="checkQuiz(this, false, 'q8')">Cabo coaxial</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 9 -->
+                <div class="quiz-question" id="q9">
+                    <h4><span class="question-number">9</span> Para que serve o switch na topologia em estrela?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q9')">Amplificar o sinal</button>
+                        <button onclick="checkQuiz(this, true, 'q9')">Gerenciar o tráfego de dados</button>
+                        <button onclick="checkQuiz(this, false, 'q9')">Converter fibra em cobre</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <!-- Pergunta 10 -->
+                <div class="quiz-question" id="q10">
+                    <h4><span class="question-number">10</span> O que significa IIoT?</h4>
+                    <div class="quiz-options">
+                        <button onclick="checkQuiz(this, false, 'q10')">Internet Industrial de Ontem</button>
+                        <button onclick="checkQuiz(this, true, 'q10')">Internet Industrial das Coisas</button>
+                        <button onclick="checkQuiz(this, false, 'q10')">Interface Industrial de Operação</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div>
+                    <div class="quiz-progress" id="quizProgress">0/10 questões respondidas</div>
+                    <button class="quiz-reset-btn" onclick="resetQuiz()"><i class="fas fa-redo"></i> Reiniciar Quiz</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ABA 3 – MATERIAL DE LEITURA                                   -->
+        <!-- ============================================================ -->
+        <div id="tab3" class="tab-content">
+
+            <div class="reading-section">
+                <div class="reading-card">
+                    <div class="image-placeholder purple"><i class="fas fa-network-wired"></i></div>
+                    <h4>Par Trançado</h4>
+                    <p>Guia completo sobre cabos de par trançado: como funcionam, onde usar e dicas de instalação.</p>
+                    <button class="btn-link article" onclick="toggleMaterial('material1')"><i class="fas fa-book-open"></i> Ler mais</button>
+                </div>
+
+                <div class="reading-card">
+                    <div class="image-placeholder blue"><i class="fas fa-fiber"></i></div>
+                    <h4>Fibra Óptica</h4>
+                    <p>Tudo sobre fibra óptica industrial: vantagens, tipos, conectores e aplicações.</p>
+                    <button class="btn-link article" onclick="toggleMaterial('material2')"><i class="fas fa-book-open"></i> Ler mais</button>
+                </div>
+
+                <div class="reading-card">
+                    <div class="image-placeholder orange"><i class="fas fa-wifi"></i></div>
+                    <h4>Wireless Industrial</h4>
+                    <p>Redes sem fio no chão de fábrica: aplicações, desafios e melhores práticas.</p>
+                    <button class="btn-link article" onclick="toggleMaterial('material3')"><i class="fas fa-book-open"></i> Ler mais</button>
+                </div>
+
+                <div class="reading-card">
+                    <div class="image-placeholder yellow"><i class="fas fa-star"></i></div>
+                    <h4>Topologia em Estrela</h4>
+                    <p>Como a topologia em estrela pode melhorar a confiabilidade da sua rede industrial.</p>
+                    <button class="btn-link article" onclick="toggleMaterial('material4')"><i class="fas fa-book-open"></i> Ler mais</button>
+                </div>
+
+                <div class="reading-card">
+                    <div class="image-placeholder green"><i class="fas fa-grip-lines"></i></div>
+                    <h4>Topologia em Barramento</h4>
+                    <p>Entenda a topologia em barramento e quando ela ainda é útil na indústria.</p>
+                    <button class="btn-link article" onclick="toggleMaterial('material5')"><i class="fas fa-book-open"></i> Ler mais</button>
+                </div>
+            </div>
+
+            <div class="media-box">
+                <div class="text">
+                    <i class="fas fa-book-reader"></i>
+                    <span><strong>Material completo:</strong> guias detalhados sobre cada assunto</span>
+                </div>
+            </div>
+        </div>
+
+              <!-- ============================================================ -->
+        <!-- ABA 4 – FERRAMENTAS                                          -->
+        <!-- ============================================================ -->
+        <div id="tab4" class="tab-content">
+
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: #f8f6ff; border-radius: 24px; padding: 1.5rem; flex:1 1 200px; border:2px solid #f0ecf9;">
+                    <i class="fas fa-tools" style="font-size:2rem; color:#6C2BD9;"></i>
+                    <h4 style="margin: 10px 0 6px; color:#1A1A2E;">Ferramentas físicas</h4>
+                    <ul style="list-style:none; padding-left:0;">
+                        <li style="padding:6px 0; border-bottom:1px solid #f0ecf9;"><i class="fas fa-crimp" style="color:#FF6B35;"></i> Crimpador RJ45</li>
+                        <li style="padding:6px 0; border-bottom:1px solid #f0ecf9;"><i class="fas fa-bolt" style="color:#FF6B35;"></i> Testador de cabos</li>
+                        <li style="padding:6px 0;"><i class="fas fa-microscope" style="color:#FF6B35;"></i> Multímetro</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f6ff; border-radius: 24px; padding: 1.5rem; flex:1 1 200px; border:2px solid #f0ecf9;">
+                    <i class="fas fa-download" style="font-size:2rem; color:#6C2BD9;"></i>
+                    <h4 style="margin: 10px 0 6px; color:#1A1A2E;">Downloads úteis</h4>
+                    <ul style="list-style:none; padding-left:0;">
+                        <li style="padding:6px 0; border-bottom:1px solid #f0ecf9;"><i class="fas fa-file-pdf" style="color:#FF6B35;"></i> Checklist de instalação</li>
+                        <li style="padding:6px 0; border-bottom:1px solid #f0ecf9;"><i class="fas fa-file-pdf" style="color:#FF6B35;"></i> Guia de cores T568A/B</li>
+                        <li style="padding:6px 0;"><i class="fas fa-project-diagram" style="color:#FF6B35;"></i> Modelo de projeto (.drawio)</li>
+                    </ul>
+                </div>
+                <div style="background: #f8f6ff; border-radius: 24px; padding: 1.5rem; flex:1 1 200px; border:2px solid #f0ecf9;">
+                    <i class="fas fa-calculator" style="font-size:2rem; color:#6C2BD9;"></i>
+                    <h4 style="margin: 10px 0 6px; color:#1A1A2E;">Calculadora de distâncias</h4>
+                    <p style="font-size:0.9rem; color:#4a4a6a;">Até 100m → Par Trançado · >100m → Fibra Óptica</p>
+                    <div style="background:#f0ecf9; border-radius: 30px; padding:0.2rem 1rem; display:inline-block; font-weight:600; color:#6C2BD9;">ex: 75m → par trançado</div>
+                </div>
+            </div>
+
+            <!-- TUTORIAIS ESCRITOS DAS FERRAMENTAS -->
+            <h3 style="color:#1A1A2E; margin: 1.5rem 0 1rem;"><i class="fas fa-graduation-cap" style="color:#FF6B35;"></i> Como usar as ferramentas</h3>
+
+            <div class="tool-tutorial">
+                <h4><i class="fas fa-crimp" style="color:#FF6B35;"></i> Como usar o Crimpador RJ45</h4>
+                <p><strong>Passo a passo para crimpar um cabo de rede:</strong></p>
+                <ul>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>1. Prepare o cabo:</strong> Corte o cabo no comprimento desejado com o alicate de corte.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>2. Descasque a capa:</strong> Use a lâmina do crimpador para remover cerca de 2-3 cm da capa externa.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>3. Organize os fios:</strong> Separe os 8 fios na ordem T568B.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>4. Corte os fios:</strong> Deixe-os alinhados com cerca de 1,5 cm.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>5. Insira no conector:</strong> Empurre até o fundo do conector RJ45.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>6. Crimpe:</strong> Pressione firmemente até ouvir um "click".</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>7. Teste:</strong> Use um testador de cabos para verificar a conexão.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>💡 Dica:</strong> Sempre mantenha o padrão T568B em toda a instalação.</p>
+                </div>
+            </div>
+
+            <div class="tool-tutorial">
+                <h4><i class="fas fa-bolt" style="color:#FF6B35;"></i> Como usar o Testador de Cabos</h4>
+                <p><strong>Como testar um cabo de rede corretamente:</strong></p>
+                <ul>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>1. Conecte as extremidades:</strong> Uma no transmissor, outra no receptor.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>2. Ligue o testador:</strong> Selecione o modo "Test" ou "Continuity".</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>3. Observe os LEDs:</strong> Devem acender na sequência 1-8.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>4. Verifique falhas:</strong> LED apagado = falha. LED fora de ordem = cruzamento.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>5. Teste com dispositivo:</strong> Conecte a um switch/PC para confirmar.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>💡 Dica:</strong> Teste sempre os cabos antes de instalá-los permanentemente.</p>
+                </div>
+            </div>
+
+            <div class="tool-tutorial">
+                <h4><i class="fas fa-microscope" style="color:#FF6B35;"></i> Como usar o Multímetro</h4>
+                <p><strong>Como usar o multímetro para diagnosticar problemas de rede:</strong></p>
+                <ul>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>1. Selecionar a função:</strong> Resistência (Ω) ou continuidade (buzzer).</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>2. Teste de continuidade:</strong> Toque as pontas no mesmo fio (deve bipear).</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>3. Teste de curto:</strong> Toque em dois fios diferentes (não deve conduzir).</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>4. Teste de tensão:</strong> Use a função V para verificar tensão nos pinos.</li>
+                    <li><i class="fas fa-circle" style="color:#6C2BD9; font-size:0.5rem;"></i> <strong>5. Diagnóstico:</strong> Resistência alta = oxidação. Curto = isolamento ruim.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>💡 Dica:</strong> Use o multímetro em conjunto com o testador de cabos para resultados precisos.</p>
+                </div>
+            </div>
+
+            <div class="media-box">
+                <div class="text">
+                    <i class="fas fa-book-open"></i>
+                    <span><strong>Tutoriais escritos:</strong> passo a passo detalhado para usar cada ferramenta</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== RODAPÉ ===== -->
+        <hr>
+        <div class="footer-note">
+            <span><i class="fas fa-copyright"></i> Link Industrial · guia visual para automação</span>
+            <span><i class="fas fa-rocket"></i> Indústria 4.0 · Redes · Automação</span>
+        </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        // ===== TOGGLE MODO ESCURO =====
+        function toggleDarkMode() {
+            const body = document.body;
+            const label = document.getElementById('darkLabel');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                label.textContent = 'Modo Claro';
+                document.querySelector('.dark-toggle i').className = 'fas fa-sun';
+            } else {
+                label.textContent = 'Modo Escuro';
+                document.querySelector('.dark-toggle i').className = 'fas fa-moon';
+            }
+        }
+
+        // ===== TABS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = {
+                tab1: document.getElementById('tab1'),
+                tab2: document.getElementById('tab2'),
+                tab3: document.getElementById('tab3'),
+                tab4: document.getElementById('tab4')
+            };
+
+            tabs.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    tabs.forEach(b => b.classList.remove('active'));
+                    Object.values(contents).forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    if (contents[tabId]) contents[tabId].classList.add('active');
+                });
+            });
+        });
+
+        // ===== TOGGLE MATERIAL =====
+        function toggleMaterial(materialId) {
+            const material = document.getElementById(materialId);
+            if (material) {
+                material.classList.toggle('show');
+                const allMaterials = document.querySelectorAll('.material-content');
+                allMaterials.forEach(m => {
+                    if (m.id !== materialId) m.classList.remove('show');
+                });
+                if (material.classList.contains('show')) {
+                    setTimeout(() => material.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+                }
+            }
+        }
+
+        // ===== QUIZ =====
+        let quizAnswered = {};
+
+        function checkQuiz(button, isCorrect, questionId) {
+            // Se já respondeu, não faz nada
+            if (quizAnswered[questionId]) return;
+
+            const questionDiv = document.getElementById(questionId);
+            const feedback = questionDiv.querySelector('.quiz-feedback');
+            const allButtons = questionDiv.querySelectorAll('.quiz-options button');
+
+            // Desabilita todos os botões
+            allButtons.forEach(b => b.disabled = true);
+
+            // Marca o correto e o errado
+            allButtons.forEach(b => {
+                if (b === button) {
+                    if (isCorrect) {
+                        b.classList.add('correct');
+                    } else {
+                        b.classList.add('wrong');
+                    }
+                }
+            });
+
+            // Marca a resposta correta se errou
+            if (!isCorrect) {
+                allButtons.forEach(b => {
+                    if (b.dataset.correct === 'true') {
+                        b.classList.add('correct');
+                    }
+                });
+            }
+
+            // Mostra feedback
+            if (isCorrect) {
+                feedback.className = 'quiz-feedback show success';
+                feedback.textContent = '✅ Correto! Excelente!';
+            } else {
+                feedback.className = 'quiz-feedback show error';
+                feedback.textContent = '❌ Não foi dessa vez! Tente a próxima.';
+            }
+
+            // Marca como respondida
+            quizAnswered[questionId] = true;
+
+            // Atualiza contador
+            updateQuizCounter();
+        }
+
+        function updateQuizCounter() {
+            const total = 10;
+            const answered = Object.keys(quizAnswered).length;
+            document.getElementById('quizCounter').textContent = answered + '/' + total + ' respondidas';
+            document.getElementById('quizProgress').textContent = answered + '/' + total + ' questões respondidas';
+        }
+
+        function resetQuiz() {
+            quizAnswered = {};
+            const allQuestions = document.querySelectorAll('.quiz-question');
+            allQuestions.forEach(q => {
+                const buttons = q.querySelectorAll('.quiz-options button');
+                buttons.forEach(b => {
+                    b.disabled = false;
+                    b.className = '';
+                });
+                const feedback = q.querySelector('.quiz-feedback');
+                feedback.className = 'quiz-feedback';
+                feedback.textContent = '';
+            });
+            updateQuizCounter();
+        }
+
+        // Inicializa contador
+        updateQuizCounter();
+
+        // ===== CARREGA VOZES DA API =====
+        if (window.speechSynthesis) {
+            window.speechSynthesis.getVoices();
+            window.speechSynthesis.onvoiceschanged = function() {
+                window.speechSynthesis.getVoices();
+            };
+        }
+    </script>
+
+</body>
+</html>
+  
